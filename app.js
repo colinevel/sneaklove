@@ -76,4 +76,6 @@ const basePageRouter = require("./routes/index");
 app.use("/", basePageRouter);
 app.use("/auth", require("./routes/auth"));
 
+app.use("/auth", require("./routes/auth"));
+
 module.exports = app;

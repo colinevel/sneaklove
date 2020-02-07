@@ -4,15 +4,15 @@ const uploadCloud = require("../config/cloudinary.js");
 const sneakersModel = require("../models/Sneaker");
 const tagsModel = require("../models/Tag");
 
-router.get("/", (req, res) => {
+router.get(["/","/home"], (req, res) => {
   res.render("index");
 });
 
 router.get("/sneakers/collection", (req, res, next) => {
   sneakersModel
-    .find()
+  .find()
     .then(dbResults => {
-      console.log("find dbresult", dbResults);
+      console.log(dbResults);
       res.render("products", {
         sneakers: dbResults
       });
@@ -20,9 +20,7 @@ router.get("/sneakers/collection", (req, res, next) => {
     .catch(next);
 });
 
-router.get("/products_manage", (req, res) => {
-  res.render("products_manage");
-});
+
 
 router.post("/prod-add/new-tag", (req, res, next) => {
   console.log(req.body);
@@ -74,7 +72,31 @@ router.get("/one-product/:id", (req, res, next) => {
     .catch(next);
 });
 
-/*SNEAKERS SECTION*/
+router.get("/prod-add", (req, res, next) => {
+  tagsModel
+  .find()
+  .then(dbResults => {
+    console.log(dbResults);
+    res.render("products_add", {
+      tags: dbResults
+    });
+  })
+  .catch(next);
+});
+
+
+
+router.get("/prod-manage", (req, res, next) => {
+  sneakersModel
+  .find()
+  .then((dbRes) => {
+    console.log(dbRes);
+    res.render("products_manage", {
+      sneakers: dbRes
+    })
+  })
+  .catch(next);
+});
 
 router.get("/sneakers/men", (req, res, next) => {
   sneakersModel
@@ -109,5 +131,8 @@ router.get("/sneakers/kids", (req, res, next) => {
     })
     .catch(next);
 });
+
+
+
 
 module.exports = router;
