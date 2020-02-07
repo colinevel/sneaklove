@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const uploadCloud = require("../config/cloudinary.js");
+
 const sneakersModel = require("../models/Sneaker");
 const tagsModel = require("../models/Tag");
 
-router.get(["/","/home"], (req, res) => {
+router.get(["/", "/home"], (req, res) => {
   res.render("index");
 });
 
@@ -56,7 +56,6 @@ router.get("/sneakers/kids", (req, res, next) => {
 });
 
 
-
 router.get("/one-product/:id", (req, res, next) => {
   sneakersModel
     .findById(req.params.id)
@@ -67,10 +66,5 @@ router.get("/one-product/:id", (req, res, next) => {
     })
     .catch(next);
 });
-
-
-
-
-
 
 module.exports = router;

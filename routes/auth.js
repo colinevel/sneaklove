@@ -58,10 +58,8 @@ router.post("/signup", (req, res, next) => {
         if (bcrypt.compareSync(user.password, dbRes.password)) {
           // encryption says : password match success
           const { _doc: clone } = { ...dbRes }; // make a clone of db user
-  
           delete clone.password; // remove password from clone
           // console.log(clone);
-  
           req.session.currentUser = clone; // user is now in session... until session.destroy
           return res.redirect("/prod-manage");
         } else {
