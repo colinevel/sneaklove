@@ -3,8 +3,7 @@ const Schema = mongoose.Schema;
 
 const tagSchema = new Schema({
   name: {
-    type: String,
-    enum: ["casual", "running", "lifestyle", "tennistable", "basketball"]
+    type: String, required: true
   }
 });
 
