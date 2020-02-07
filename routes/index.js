@@ -46,13 +46,14 @@ router.get("/prod-add", (req, res, next) => {
     })
     .catch(next);
 });
+
 router.post("/prod-add", uploadCloud.single("image"), (req, res, next) => {
   const sneaker = req.body;
   if (req.file) sneaker.image = req.file.secure_url;
   sneakersModel
     .create(sneaker)
     .then(() => {
-      res.redirect("products_manage");
+      res.redirect("prod-manage");
     })
     .catch(next);
 });
