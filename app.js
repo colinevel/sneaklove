@@ -2,7 +2,7 @@ console.log("node says : waxOn/waxOff !");
 
 require("dotenv").config();
 require("./config/mongodb"); // database initial setup
-// require("./helpers/hbs"); // utils for hbs templates
+require("./helpers/helpers"); // utils for hbs templates
 
 // base dependencies
 const express = require("express");
@@ -15,9 +15,9 @@ const cookieParser = require("cookie-parser");
 
 // initial config
 app.set("view engine", "hbs");
-app.set("views", __dirname + "/view");
+app.set("views", __dirname + "/views");
 app.use(express.static("public"));
-hbs.registerPartials(__dirname + "/views/partials");
+hbs.registerPartials(__dirname + "/views/partial");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
@@ -74,5 +74,6 @@ app.use(eraseSessionMessage());
 // Getting/Using router(s)
 const basePageRouter = require("./routes/index");
 app.use("/", basePageRouter);
+app.use("/auth", require("./routes/auth"));
 
 module.exports = app;
