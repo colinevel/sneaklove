@@ -35,7 +35,6 @@ app.use(
     resave: true
   })
 );
-
 app.locals.site_url = process.env.SITE_URL;
 // used in front end to perform ajax request (var instead of hardcoded)
 
@@ -75,7 +74,6 @@ app.use(eraseSessionMessage());
 const basePageRouter = require("./routes/index");
 app.use("/", basePageRouter);
 app.use("/auth", require("./routes/auth"));
-
-app.use("/auth", require("./routes/auth"));
+app.use("/", require("./routes/dashboard_sneaker"));
 
 module.exports = app;
